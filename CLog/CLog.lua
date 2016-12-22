@@ -18,65 +18,65 @@ local function onCLEvent()
 	elseif event == "PLAYER_REGEN_DISABLED" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] = date().."."..truems.." You enter combat. "..event
+				CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." You enter combat. "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." You enter combat. "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." You enter combat. "..event
 			end
 		end
 	elseif event == "PLAYER_REGEN_ENABLED" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] = date().."."..truems.." You exit combat. "..event
+				CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." You exit combat. "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." You exit combat. "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." You exit combat. "..event
 			end
 		end
 	elseif event == "CHAT_MSG_MONSTER_SAY" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] = date().."."..truems.." "..arg2 .." says: "..arg1.." "..event
+				CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg2 .." says: "..arg1.." "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." "..arg2 .." says: "..arg1.." "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg2 .." says: "..arg1.." "..event
 			end
 		end
 	elseif event == "CHAT_MSG_MONSTER_YELL" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] = date().."."..truems.." "..arg2 .." yells: "..arg1.." "..event
+				CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg2 .." yells: "..arg1.." "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." "..arg2 .." yells: "..arg1.." "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg2 .." yells: "..arg1.." "..event
 			end
 		end
 	elseif event == "CHAT_MSG_MONSTER_EMOTE" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] = date().."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
+				CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
 			end
 		end
 	elseif event == "CHAT_MSG_RAID_BOSS_EMOTE" then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
 				if arg2 then
-					CLogEvents[1] = date().."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
+					CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
 				else
-					CLogEvents[1] = date().."."..truems.." "..arg1.." "..event
+					CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg1.." "..event
 				end
 			else
 				if arg2 then
-					CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
+					CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..string.gsub(arg1, "%%s", arg2).." "..event
 				else
-					CLogEvents[1] = date().."."..truems.." "..arg1.." "..event
+					CLogEvents[1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg1.." "..event
 				end
 			end
 		end
 	elseif (event ~= "ADDON_LOADED" and arg1) then
 		if CLog_State then
 			if getn(CLogEvents) == 0 then
-				CLogEvents[1] =  date().."."..truems.." "..arg1.." "..event
+				CLogEvents[1] =  date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg1.." "..event
 			else
-				CLogEvents[getn(CLogEvents)+1] = date().."."..truems.." "..arg1.." "..event
+				CLogEvents[getn(CLogEvents)+1] = date("%d/%m/%y %H:%M:%S").."."..truems.." "..arg1.." "..event
 			end
 		end
 	end	
@@ -185,7 +185,9 @@ function CLog_Register()
 	CLogFrame:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_DAMAGE");
 	CLogFrame:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS");
 	CLogFrame:RegisterEvent("CHAT_MSG_SPELL_FAILED_LOCALPLAYER");
+	CLogFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
 	CLogFrame:RegisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE");
+	CLogFrame:RegisterEvent("CHAT_MSG_LOOT");
 end
 
 function CLog_Unregister()
@@ -252,4 +254,6 @@ function CLog_Unregister()
 	CLogFrame:UnregisterEvent("CHAT_MSG_SPELL_PERIODIC_CREATURE_BUFFS");
 	CLogFrame:UnregisterEvent("CHAT_MSG_SPELL_FAILED_LOCALPLAYER");
 	CLogFrame:UnregisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE");
-end
+	CLogFrame:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED");
+	CLogFrame:UnregisterEvent("CHAT_MSG_LOOT");
+	end
