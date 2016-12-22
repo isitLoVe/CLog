@@ -1,0 +1,9 @@
+## Interface: 11200
+## Version: 1.2
+## Title: CLog
+## Notes: Records combat log events with name of event.
+## SavedVariables: CLogEvents
+## SavedVariablesPerCharacter: CLogSettingsChar
+## Author: Snelf
+
+CLog.lua
