@@ -118,7 +118,7 @@ function SlashCmdList.CLOG(var)
 		CLogEvents = {}
 		DEFAULT_CHAT_FRAME:AddMessage("Combat Log has been cleared.", 1, 1, 0);
 	else
-		Print("\"\/clog\" or \"\/clog clear\"")
+		DEFAULT_CHAT_FRAME:AddMessage("\"\/clog\" or \"\/clog clear\"")
 	end
 end
 
